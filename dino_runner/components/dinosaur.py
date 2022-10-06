@@ -26,18 +26,23 @@ class Dinosaur (Sprite): #Sprite para herencia
 
         self.jump_vel = self.JUMP_VEL #velocidad del dinosaurio
 #***********RUN VERIFICATION METHOD(BETA)************       
-    def run_verification(self):
+    # def run_verification(self):
+    #     if self.dino_run: # CONDICIONAL PARA DETECTAR SI ESTA CORRIENDO
+    #         self.run()
+    #     elif self.dino_jump:
+    #         self.jump()
+    #     update_object = Dinosaur()
+    #     self.update()   
+#************UPDATE METHOD**************          
+    def update(self, user_input):
         if self.dino_run: # CONDICIONAL PARA DETECTAR SI ESTA CORRIENDO
             self.run()
         elif self.dino_jump:
             self.jump()
-        update_object = Dinosaur()
+        
         if self.dino_duck:
             self.duck()
-        self.update()   
-#************UPDATE METHOD**************          
-    def update(self, user_input):
-        if user_input[pygame.K_UP] and not self.dino_jump:#detectando evento del usuario (ADICIONAR SPACE) K_SAPACE(EXTRA PROYECTO)
+        if user_input[pygame.K_SPACE] and not self.dino_jump:#detectando evento del usuario (ADICIONAR SPACE) K_SAPACE(EXTRA PROYECTO)
             self.dino_jump = True
             self.dino_run = False
             self.dino_duck = False

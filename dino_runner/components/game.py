@@ -15,10 +15,9 @@ class Game:
         self.player = Dinosaur()
         self.obstacle_manager = obstacle_manager()
         self.playing = False
-        self.game_speed = 20
+        self.game_speed = 15
         self.x_pos_bg = 0
         self.y_pos_bg = 380
-
         self.points = 0
         self.death_count = 0 
     def execute (self):
