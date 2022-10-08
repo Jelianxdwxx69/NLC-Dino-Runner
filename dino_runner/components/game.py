@@ -76,6 +76,7 @@ class Game:
         self.draw_background()
         self.draw_score()
         self.player.draw(self.screen)
+        self.player.check_invicibility(self.screen)
         self.obstacle_manager.draw(self.screen)
         self.power_up_manager.draw(self.screen)
         pygame.display.update()
@@ -109,12 +110,15 @@ class Game:
             text_rect = text.get_rect()
             text_rect.center = ((SCREEN_WIDTH//2),((SCREEN_HEIGHT//2)-120))
             self.screen.blit(text, text_rect)
+
         elif  self.death_count > 0:
+            #**********************LETRERO DE RESTART*********************
             font = pygame.font.Font("freesansbold.ttf", 30)#implremntar fondo
             text = font.render("PRESS ANY KEY TO RESTART", True, (0,0,0))
             text_rect = text.get_rect()
             text_rect.center = ((SCREEN_WIDTH//2),((SCREEN_HEIGHT//2)-120))
             self.screen.blit(text, text_rect)
+            #*****************LETRERO DE PUNTOS ACUMULADOS******************
             font = pygame.font.Font("freesansbold.ttf", 30)#implremntar fondo
             text = font.render(f"POINTS:  {self.points}", True, (0,0,0))
             text_rect = text.get_rect()

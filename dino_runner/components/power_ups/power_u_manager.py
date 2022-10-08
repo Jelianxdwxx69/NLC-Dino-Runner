@@ -11,15 +11,14 @@ class power_up_manager :
     def __init__(self) -> None:
         self.power_ups = []
         self.when_appears = 0
-
+#metodo generado de puwer ups
     def generate_power_ups(self,points):
         if len(self.power_ups) == 0:
             if self.when_appears == points:
                 self.when_appears = random.randint(self.when_appears*200,self.when_appears*300)
-                self.power_ups.append(shield())
                 self.power_ups.append(hammer()) 
-           
-                   
+                self.power_ups.append(shield())
+                    
 
     def update (self, game_speed, player, points):
         self.generate_power_ups(points)
@@ -32,8 +31,8 @@ class power_up_manager :
                player.show_text = True
                player.type = power_up.type
                time_random = random.randint(5,8)
-               player.shield_time_up = power_up.start_time*(time_random*1000)
-               player.hammer_time_up = power_up.start_time*(time_random*1000)
+               player.shield_time_up = power_up.start_time+(time_random*1000)
+               player.hammer_time_up = power_up.start_time+(time_random*1000)
                self.power_ups.remove(power_up)  
             break
     def draw (self, screen):

@@ -28,14 +28,16 @@ class Dinosaur (Sprite): #Sprite para herencia
         self.dino_duck = False
 
         self.jump_vel = self.JUMP_VEL #velocidad del dinosaurio
+        self.setup_state()
+
     def setup_state (self):
         self.has_power_up = False
         self.shield = False
+        self.hammer = False
+        self.time_to_show = 0
         self.show_text = False
         self.shield_time_up = 0
-        self.hammer = False
-        self.show_text = False
-        self.hammer_time_up = 0 
+        self.hummer_time_up = 0
 #************UPDATE METHOD**************          
     def update(self, user_input):
         if self.dino_run: # CONDICIONAL PARA DETECTAR SI ESTA CORRIENDO
@@ -44,7 +46,7 @@ class Dinosaur (Sprite): #Sprite para herencia
             self.jump()
         if self.dino_duck:
             self.duck()
-            
+
         if user_input[pygame.K_UP] or user_input[pygame.K_SPACE] and not self.dino_jump:#detectando evento del usuario (ADICIONAR SPACE) K_SAPACE(EXTRA PROYECTO)
             self.dino_jump = True
             self.dino_run = False
@@ -65,9 +67,9 @@ class Dinosaur (Sprite): #Sprite para herencia
         self.image = JUMP_IMAGE[self.type]
         if self.dino_jump:
             self.dino_rect.y -= self.jump_vel * 4
-            print(self.dino_rect.y)
+          
             self.jump_vel -=0.8
-            print(self.jump_vel)
+            
         if self.jump_vel < -self.JUMP_VEL:
             self.dino_rect.y = self.Y_POS
             self.dino_jump  = False
@@ -91,8 +93,25 @@ class Dinosaur (Sprite): #Sprite para herencia
     def draw(self, screen: pygame.Surface ): #surface es un tipo de dato
         screen.blit(self.image, (self.dino_rect.x, self.dino_rect.y))
 
-    def check_invicibility (self):
-        pass 
+    def check_invicibility (self, screen):
+        if self.shield == True:
+            time_to_show = round((self.shield_time_up - pygame.time.get_ticks())/100, 2)
+            if time_to_show >= 0 and self.show_text:
+                print(time_to_show) #mostrar en juego 
+            else:
+                self.shield = False
+                self.type = DEFAULT_TYPE
+
+        if self.hammer == True:
+            time_to_show = round((self.hammer_time_up - pygame.time.get_ticks())/100, 2)
+            if time_to_show >= 0 and self.show_text:
+                print(time_to_show) #mostrar en juego 
+            else:
+                self.hammer = False
+                self.type = DEFAULT_TYPE              
+
+
+
 
     #implementar power ups (martillo) luego lo qeu se pueda 
     # usa el 200% o mas estupida   
